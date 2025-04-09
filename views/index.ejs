@@ -27,11 +27,13 @@
 
         <h2>Add A Shot-On-Phone:</h2>
 
-        <form action="/addDevice" method="POST">
-            <input type="text" placeholder="Title" name="title">
-            <input type="text" placeholder="Device" name="device">
-            <input type="text" placeholder="Genre" name="genre">
-            <input type="submit">
+        <form action="/addWorkout/muscle/workout" method="POST">
+            <input type="text" name="exercise" placeholder="Exercise (e.g., Bench Press)">
+            <input type="text" name="group" placeholder="Muscle Group (e.g., Chest)">
+            <input type="number" name="sets" placeholder="Sets">
+            <input type="number" name="reps" placeholder="Reps">
+            <input type="text" name="difficulty" placeholder="Difficulty (e.g., Intermediate)">
+            <input type="submit" value="Add Workout">
         </form>
 
         <script src='js/main.js'></script>
