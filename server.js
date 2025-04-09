@@ -6,7 +6,7 @@ require('dotenv').config()
 
 let db,
     dbConnectionStr = process.env.DB_STRING,
-    dbName = 'filmDevice'
+    dbName = 'workoutProgram'
 
 
 MongoClient.connect(dbConnectionStr, { useUnifiedTopology: true })
@@ -21,25 +21,38 @@ app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
 
 app.get('/',(request, response)=>{ //just like a click event
-    db.collection('devices').find().sort({likes: -1}).toArray()
+    db.collection('workouts').find().sort({likes: -1}).toArray()
     .then(data => {
         response.render('index.ejs', { info: data })
     })
     .catch(error => console.error(error))
 })
 
-app.post('/addDevice', (request, response) => {
-    db.collection('devices').insertOne({title: request.body.title,
-    device: request.body.device, genre: request.body.genre, likes: 0})
+app.post('/addWorkout/muscle/workout', (request, response) => {
+    db.collection('workouts').insertOne({exercise: request.body.exercise,
+    workout: request.body.workout,
+    group: request.body.group,
+    sets: request.body.sets,
+    reps: request.body.reps,
+    difficulty: request.body.difficulty,
+    likes: 0
+})
     .then(result => {
-        console.log('Device Added')
+        console.log('workout Added')
         response.redirect('/')
     })
     .catch(error => console.error(error))
 })
 
 app.put('/addOneLike', (request, response) => {
-    db.collection('devices').updateOne({title: request.body.titleS, device: request.body.deviceS, genre: request.body.genreS,likes: request.body.likesS},{
+    db.collection('workouts').updateOne({exercise: request.body.exerciseS, 
+        workout: request.body.workoutS, 
+        group: request.body.groupS,
+        sets: request.body.setsS,
+        reps: request.body.repsS,
+        difficulty: request.body.difficultyS,
+        likes: request.body.likesS
+    },{
         $set: {
             likes:request.body.likesS + 1
           }
@@ -55,11 +68,11 @@ app.put('/addOneLike', (request, response) => {
 
 })
 
-app.delete('/deleteDevice', (request, response) => {
-    db.collection('devices').deleteOne({title: request.body.titleS})
+app.delete('/deleteworkout', (request, response) => {
+    db.collection('workouts').deleteOne({exercise: request.body.exerciseS})
     .then(result => {
-        console.log('Device Deleted')
-        response.json('Device Deleted')
+        console.log('workout Deleted')
+        response.json('workout Deleted')
     })
     .catch(error => console.error(error))
 

@@ -3,36 +3,42 @@
     <head>
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="viewport" content="width=workout-width, initial-scale=1.0">
         <title>Document</title>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
         <link rel="stylesheet" href="css/style.css">
     </head>
 
     <body>
-        <h1>Shot-On-Phone Film API</h1>
+        <h1>5x5x5 Workout API</h1>
         
-        <ul class="devices">
+        <ul class="workouts">
         <% for(let i=0; i < info.length; i++) {%> 
-            <li class="device">
-                <span><%= info[i].title %></span>
-                <span><%= info[i].device %></span>
-                <span><%= info[i].genre %></span>
-                <span><%= info[i].likes %></span>
+            <li class="workout">
+                <span><%= info[i].exercise %></span>
+                <span><%= info[i].group %></span>
+                <span><%= info[i].sets %></span>
+                <span><%= info[i].reps %></span>
+                <span><%= info[i].difficulty %></span>
                 <span class='fa fa-thumbs-up'></span>
                 <span class='fa fa-trash'></span>
             </li>
         <% } %>
         </ul>
 
-        <h2>Add A Shot-On-Phone:</h2>
+        <h2>Input Workout:</h2>
 
         <form action="/addWorkout/muscle/workout" method="POST">
             <input type="text" name="exercise" placeholder="Exercise (e.g., Bench Press)">
             <input type="text" name="group" placeholder="Muscle Group (e.g., Chest)">
             <input type="number" name="sets" placeholder="Sets">
             <input type="number" name="reps" placeholder="Reps">
-            <input type="text" name="difficulty" placeholder="Difficulty (e.g., Intermediate)">
+            <select type="text" name="difficulty" placeholder="Difficulty (e.g., Intermediate)">
+                <option value="easy">Easy</option>
+                <option value="intermediate">Intermediate</option>
+                <option value="hard">Hard</option>
+                <option value="insane">Insane</option>
+              </select>
             <input type="submit" value="Add Workout">
         </form>
 
